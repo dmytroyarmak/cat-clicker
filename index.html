@@ -6,8 +6,25 @@
 </head>
 <body>
 	<h1>Cat Clicker</h1>
-	<img src="./images/cat.jpg" alt="Photo with cat" data-js="cc-image">
-	<p>You have been clicker <strong data-js="cc-counter">x</strong> times already!</p>
+
+	<div data-js="cc-container"></div>
+
+	<script type="text/template" data-js="cc-template">
+		<h2>{{catName}}</h2>
+		<img src="./images/{{imageName}}" alt="Photo with cat" data-js="cc-image">
+		<p>You have been clicker <strong data-js="cc-counter">{{counterValue}}</strong> times already!</p>
+	</script>
+
 	<script src="./js/cat-clicker.js"></script>
+	<script>
+		(function() {
+			var containerNode = document.querySelector('[data-js="cc-container"]'),
+				catClicker1  = new CC.CatClicker(containerNode, 'Cat 1', 'cat-1.jpg'),
+				catClicker2  = new CC.CatClicker(containerNode, 'Cat 2', 'cat-2.jpg');
+
+			catClicker1.render();
+			catClicker2.render();
+		})();
+	</script>
 </body>
 </html>
