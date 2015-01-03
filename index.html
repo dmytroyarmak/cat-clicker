@@ -7,23 +7,41 @@
 <body>
 	<h1>Cat Clicker</h1>
 
-	<div data-js="cc-container"></div>
+	<h2>Cat List</h2>
+	<ul data-js="cc-cat-list"></ul>
 
-	<script type="text/template" data-js="cc-template">
+	<h2>Cat View</h2>
+	<div data-js="cc-cat-view"></div>
+
+	<script type="text/template" data-js="cc-cat-clicker-tpl">
 		<h2>{{catName}}</h2>
 		<img src="./images/{{imageName}}" alt="Photo with cat" data-js="cc-image">
 		<p>You have been clicker <strong data-js="cc-counter">{{counterValue}}</strong> times already!</p>
 	</script>
 
 	<script src="./js/cat-clicker.js"></script>
+	<script src="./js/cat-view-manager.js"></script>
+	<script src="./js/cat-list.js"></script>
+
 	<script>
 		(function() {
-			var containerNode = document.querySelector('[data-js="cc-container"]'),
-				catClicker1  = new CC.CatClicker(containerNode, 'Cat 1', 'cat-1.jpg'),
-				catClicker2  = new CC.CatClicker(containerNode, 'Cat 2', 'cat-2.jpg');
+			var catListNode = document.querySelector('[data-js="cc-cat-list"]'),
+			 	catViewNode = document.querySelector('[data-js="cc-cat-view"]'),
+				cats = [
+					new CC.CatClicker('Cat 1', 'cat-1.jpg'),
+					new CC.CatClicker('Cat 2', 'cat-2.jpg'),
+					new CC.CatClicker('Cat 3', 'cat-3.jpg'),
+					new CC.CatClicker('Cat 4', 'cat-1.jpg'),
+					new CC.CatClicker('Cat 5', 'cat-2.jpg'),
+					new CC.CatClicker('Cat 6', 'cat-3.jpg')
+				],
+				catViewManager = new CC.CatViewManager(catViewNode),
+				catList = new CC.CatList(catListNode, cats, function onCatSelected(catClicker) {
+					catViewManager.show(catClicker);
+				});
 
-			catClicker1.render();
-			catClicker2.render();
+			catList.render();
+			catViewManager.show(cats[0]);
 		})();
 	</script>
 </body>

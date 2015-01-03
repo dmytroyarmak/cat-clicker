@@ -1,23 +1,26 @@
 window.CC = window.CC || {};
 window.CC.CatClicker = (function() {
-	var ccTemplate = document.querySelector('[data-js="cc-template"]').innerText;
+	var catClickerTpl = document.querySelector('[data-js="cc-cat-clicker-tpl"]').innerText;
 
-	function CatClicker (container, catName, imageName) {
-		this._container = container;
+	function CatClicker (catName, imageName) {
 		this._catName = catName;
 		this._imageName = imageName;
 		this._counterValue = 0;
 	}
 
-	CatClicker.prototype.render = function () {
+	CatClicker.prototype.getCatName = function () {
+		return this._catName;
+	};
+
+	CatClicker.prototype.render = function (container) {
 		this._el = document.createElement('div');
 		this._el.innerHTML = this.getCompiledTemplate();
-		this._container.appendChild(this._el);
+		container.appendChild(this._el);
 		this.onRender();
 	};
 
 	CatClicker.prototype.getCompiledTemplate = function () {
-		return ccTemplate.replace('{{catName}}', this._catName)
+		return catClickerTpl.replace('{{catName}}', this._catName)
 			.replace('{{imageName}}', this._imageName)
 			.replace('{{counterValue}}', this._counterValue);
 	};
