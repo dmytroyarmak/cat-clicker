@@ -8,40 +8,36 @@
 	<h1>Cat Clicker</h1>
 
 	<h2>Cat List</h2>
-	<ul data-js="cc-cat-list"></ul>
+	<div data-js="cc-cat-list"></div>
 
 	<h2>Cat View</h2>
-	<div data-js="cc-cat-view"></div>
+	<div data-js="cc-cat-details"></div>
 
-	<script type="text/template" data-js="cc-cat-clicker-tpl">
+	<script type="text/template" data-js="cc-cat-details-tpl">
 		<h2>{{catName}}</h2>
 		<img src="./images/{{imageName}}" alt="Photo with cat" data-js="cc-image">
-		<p>You have been clicker <strong data-js="cc-counter">{{counterValue}}</strong> times already!</p>
+		<p>You have been clicker <strong data-js="cc-counter">{{clickCount}}</strong> times already!</p>
 	</script>
 
-	<script src="./js/cat-clicker.js"></script>
-	<script src="./js/cat-view-manager.js"></script>
-	<script src="./js/cat-list.js"></script>
+	<script src="./js/cat-model.js"></script>
+	<script src="./js/cat-list-view.js"></script>
+	<script src="./js/cat-details-view.js"></script>
+	<script src="./js/cat-clicker-octopus.js"></script>
 
 	<script>
 		(function() {
-			var catListNode = document.querySelector('[data-js="cc-cat-list"]'),
-			 	catViewNode = document.querySelector('[data-js="cc-cat-view"]'),
-				cats = [
-					new CC.CatClicker('Cat 1', 'cat-1.jpg'),
-					new CC.CatClicker('Cat 2', 'cat-2.jpg'),
-					new CC.CatClicker('Cat 3', 'cat-3.jpg'),
-					new CC.CatClicker('Cat 4', 'cat-1.jpg'),
-					new CC.CatClicker('Cat 5', 'cat-2.jpg'),
-					new CC.CatClicker('Cat 6', 'cat-3.jpg')
-				],
-				catViewManager = new CC.CatViewManager(catViewNode),
-				catList = new CC.CatList(catListNode, cats, function onCatSelected(catClicker) {
-					catViewManager.show(catClicker);
+			var catClickerOctopus = new window.CC.CatClickerOctopus({
+					catListNode: document.querySelector('[data-js="cc-cat-list"]'),
+					catDetailsNode: document.querySelector('[data-js="cc-cat-details"]'),
+					catCollectionData: [
+						{catName: 'Cat 1', imageName: 'cat-1.jpg'},
+						{catName: 'Cat 2', imageName: 'cat-2.jpg'},
+						{catName: 'Cat 3', imageName: 'cat-3.jpg'},
+						{catName: 'Cat 4', imageName: 'cat-4.jpg'},
+					]
 				});
 
-			catList.render();
-			catViewManager.show(cats[0]);
+			catClickerOctopus.start();
 		})();
 	</script>
 </body>
