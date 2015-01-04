@@ -7,33 +7,74 @@
 <body>
 	<h1>Cat Clicker</h1>
 
-	<h2>Cat List</h2>
-	<div data-js="cc-cat-list"></div>
+	<div data-js="cc-cat-list-region"></div>
+	<div data-js="cc-cat-details-region"></div>
+	<div data-js="cc-admin-button-region"></div>
+	<div data-js="cc-cat-edit-region"></div>
 
-	<h2>Cat View</h2>
-	<div data-js="cc-cat-details"></div>
+	<script type="text/template" data-js="cc-cat-list-tpl">
+		<h2>Cat List</h2>
+		<div data-js="cc-cat-list"></div>
+	</script>
 
 	<script type="text/template" data-js="cc-cat-details-tpl">
-		<h2>{{catName}}</h2>
+		<h2>Cat View</h2>
+		<h3>{{catName}}</h3>
 		<img src="./images/{{imageName}}" alt="Photo with cat" data-js="cc-image">
 		<p>You have been clicker <strong data-js="cc-counter">{{clickCount}}</strong> times already!</p>
+	</script>
+
+	<script type="text/template" data-js="cc-cat-edit-tpl">
+		<form data-js="cc-form">
+			<div>
+				<label>
+					Cat name:
+					<input type="text" value="{{catName}}" data-js="cc-cat-name-input">
+				</label>
+			</div>
+			<div>
+				<label>
+					Image name:
+					<input type="text" value="{{imageName}}" data-js="cc-image-name-input">
+				</label>
+			</div>
+			<div>
+				<label>
+					Click count:
+					<input type="number" value="{{clickCount}}" data-js="cc-click-count-input">
+				</label>
+			</div>
+			<div>
+				<button type="button" data-js="cc-cancel-button">Cancel</button>
+				<button type="submit" data-js="cc-submit-button">Save</button>
+			</div>
+		</form>
+	</script>
+
+	<script type="text/template" data-js="cc-admin-button-tpl">
+		<button data-js="cc-admin-button">Admin</button>
 	</script>
 
 	<script src="./js/cat-model.js"></script>
 	<script src="./js/cat-list-view.js"></script>
 	<script src="./js/cat-details-view.js"></script>
+	<script src="./js/cat-edit-view.js"></script>
+	<script src="./js/admin-button-view.js"></script>
 	<script src="./js/cat-clicker-octopus.js"></script>
 
 	<script>
 		(function() {
 			var catClickerOctopus = new window.CC.CatClickerOctopus({
-					catListNode: document.querySelector('[data-js="cc-cat-list"]'),
-					catDetailsNode: document.querySelector('[data-js="cc-cat-details"]'),
+					catListNode: document.querySelector('[data-js="cc-cat-list-region"]'),
+					catDetailsNode: document.querySelector('[data-js="cc-cat-details-region"]'),
+					catEditNode: document.querySelector('[data-js="cc-cat-edit-region"]'),
+					adminButtonNode: document.querySelector('[data-js="cc-admin-button-region"]'),
 					catCollectionData: [
 						{catName: 'Cat 1', imageName: 'cat-1.jpg'},
 						{catName: 'Cat 2', imageName: 'cat-2.jpg'},
 						{catName: 'Cat 3', imageName: 'cat-3.jpg'},
 						{catName: 'Cat 4', imageName: 'cat-4.jpg'},
+						{catName: 'Cat 5', imageName: 'cat-5.jpg'}
 					]
 				});
 

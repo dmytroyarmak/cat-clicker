@@ -5,8 +5,8 @@ window.CC = window.CC || {};
 
 	function CatDetailsView (attributes) {
 		this._el = attributes.el;
-		this._catModel = attributes.catModel;
 		this._onCatClicked = attributes.onCatClicked;
+		this._catModel = null;
 	}
 
 	CatDetailsView.prototype.setCatModel = function (catModel) {

@@ -19,8 +19,21 @@ window.CC = window.CC || {};
 		return this._clickCount;
 	};
 
+	CatModel.prototype.setCatName = function (catName) {
+		this._catName = catName;
+	};
+
+	CatModel.prototype.setImageName = function (imageName) {
+		this._imageName = imageName;
+	};
+
+	CatModel.prototype.setClickCount = function (clickCount) {
+		this._clickCount = clickCount;
+	};
+
 	CatModel.prototype.incrementClickCount = function () {
-		this._clickCount += 1;
+		var currentClickCount = this.getClickCount();
+		this.setClickCount(currentClickCount + 1);
 	};
 
 	exports.CatModel = CatModel;
